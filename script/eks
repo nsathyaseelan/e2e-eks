@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-mkdir ~/.aws
-echo $CONFIG > ~/.aws/config
-echo $CREDENTIALS > ~/.aws/credentials
+#mkdir ~/.aws
+#echo $CONFIG > ~/.aws/config
+#echo $CREDENTIALS > ~/.aws/credentials
 
 git clone https://github.com/yudaykiran/litmus.git
 git checkout EKSPlatform
