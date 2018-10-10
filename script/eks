@@ -6,9 +6,10 @@ set -e
 #echo $CREDENTIALS > ~/.aws/credentials
 
 git clone https://github.com/yudaykiran/litmus.git
+cd litmus
 
-cd litmus/k8s/eks/k8s-installer/
 git checkout EKSPlatform
+cd /k8s/eks/k8s-installer/
 
 echo "creating cluster"
 
