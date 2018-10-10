@@ -2,15 +2,16 @@
 
 set -e
 
-mkdir ~/.aws
-echo $CONFIG > ~/.aws/config
-echo $CREDENTIALS > ~/.aws/credentials
+#mkdir ~/.aws
+#echo $CONFIG > ~/.aws/config
+#echo $CREDENTIALS > ~/.aws/credentials
 
 echo "cleanup"
 mkdir ~/logs
 cp .kube/clusters ~/logs
 
-git clone https://github.com/openebs/litmus.git 
+git clone https://github.com/yudaykiran/litmus.git
+git checkout EKSPlatform
 cd litmus/k8s/eks/k8s-installer/
 
 echo "cleanup"
