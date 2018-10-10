@@ -13,7 +13,7 @@ cd k8s/eks/k8s-installer/
 
 echo "creating cluster"
 
-ansible-playbook create-eks-cluster.yml -vv
+#ansible-playbook create-eks-cluster.yml -vv
 
 mkdir /openebs/e2e-eks/.kube
 cat ~/.kube/config > /openebs/e2e-eks/.kube/config
