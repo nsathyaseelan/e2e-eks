@@ -6,7 +6,7 @@ mkdir .kube-openebs
 mkdir ~/.kube
 cp  .kube/config .kube-openebs/config
 cp  .kube/config ~/.kube/config
-cat /openebs/e2e-gke/.kube/clusters > .kube-openebs/clusters
+cat /openebs/e2e-eks/.kube/clusters > .kube-openebs/clusters
 
 echo " deploying Aggrigrator and Forwarder on client"
 wget https://raw.githubusercontent.com/openebs/e2e-infrastructure/master/production/efk-client/playbook/efk-vars.yml
