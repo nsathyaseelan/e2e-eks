@@ -11,8 +11,9 @@ mkdir ~/logs
 cp .kube/clusters ~/logs
 
 git clone https://github.com/yudaykiran/litmus.git
+cd litmus/
 git checkout EKSPlatform
-cd litmus/k8s/eks/k8s-installer/
+cd k8s/eks/k8s-installer/
 
 echo "cleanup"
 ansible-playbook delete-eks-cluster.yml
