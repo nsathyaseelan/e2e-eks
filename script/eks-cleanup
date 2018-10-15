@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+echo "cleanup"
+mkdir ~/logs
+cp .kube/clusters ~/logs
+
+git clone https://github.com/openebs/litmus.git
+cd litmus/k8s/eks/k8s-installer/
+
+echo "cleanup"
+ansible-playbook delete-eks-cluster.yml

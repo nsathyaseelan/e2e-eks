@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+
+git clone https://github.com/openebs/litmus.git
+cd litmus/k8s/eks/k8s-installer/
+
+echo "creating cluster"
+
+ansible-playbook create-eks-cluster.yml -vv
+
+mkdir /openebs/e2e-eks/.kube
+cat ~/.kube/config > /openebs/e2e-eks/.kube/config
+cat ~/.kube/config > /openebs/e2e-eks/.kube/admin.conf
+cat ~/logs/clusters > /openebs/e2e-eks/.kube/clusters
+
+kubectl get nodes
+wget https://raw.githubusercontent.com/openebs/litmus/master/hack/rbac.yaml
+kubectl apply -f rbac.yaml
+kubectl create configmap kubeconfig --from-file=/openebs/e2e-eks/.kube/admin.conf -n litmus
