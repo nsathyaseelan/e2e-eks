@@ -83,12 +83,12 @@ sed -i -e 's/''name=percona''/''app=jenkins-app''/g' \
 -e 's/value: app-percona-ns/value: app-jenkins-ns/g' \
 -e 's/value: percona-mysql-claim/value: jenkins-claim/g' run_jenkins_jiva_rep_network_delay.yml
 
-sed -i '0,/command:/ s/command:/\
-          - name: AWS_ACCESS_KEY_ID\
-            value: '"$AWS_ACCESS_KEY_ID"'\
-          - name: AWS_SECRET_ACCESS_KEY\
-            value: '"$AWS_SECRET_ACCESS_KEY"'\
-\n&/' run_jenkins_jiva_rep_network_delay.yml
+sed -i '0,/command:/s|        command:| \
+          - name: AWS_ACCESS_KEY_ID \
+            value: '"$AWS_ACCESS_KEY_ID"' \
+          - name: AWS_SECRET_ACCESS_KEY \
+            value: '"$AWS_SECRET_ACCESS_KEY"' \
+\n&|' run_jenkins_jiva_rep_network_delay.yml
 
 #################
 ## RUNNER MAIN ##

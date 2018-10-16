@@ -65,12 +65,13 @@ task_delimiter;
 ## TODO: Add logic to replace job ENV (SC, PVC, LABEL, NS) based on run instance intent 
 ## TODO: Add logic to add ENV for run_instance_metadata/RunID
 
-sed -i '0,/command:/ s/command:/\
-          - name: AWS_ACCESS_KEY_ID\
-            value: '"$AWS_ACCESS_KEY_ID"'\
-          - name: AWS_SECRET_ACCESS_KEY\
-            value: '"$AWS_SECRET_ACCESS_KEY"'\
-\n&/' apps/cassandra/deployers/run_litmus_test.yml
+
+sed -i '0,/command:/s|        command:| \
+          - name: AWS_ACCESS_KEY_ID \
+            value: '"$AWS_ACCESS_KEY_ID"' \
+          - name: AWS_SECRET_ACCESS_KEY \
+            value: '"$AWS_SECRET_ACCESS_KEY"' \
+\n&|' apps/cassandra/deployers/run_litmus_test.yml
 
 #################
 ## RUNNER MAIN ##

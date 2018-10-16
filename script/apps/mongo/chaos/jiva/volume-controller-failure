@@ -83,12 +83,12 @@ sed -i -e 's/''name=percona''/''app=mongo''/g' \
 -e 's/value: app-percona-ns/value: app-mongo-ns/g' \
 -e 's/value: percona-mysql-claim/value: openebs-mongo-mongo-0/g' run_mongo_jiva_controller_failure.yml
 
-sed -i '0,/command:/ s/command:/\
-          - name: AWS_ACCESS_KEY_ID\
-            value: '"$AWS_ACCESS_KEY_ID"'\
-          - name: AWS_SECRET_ACCESS_KEY\
-            value: '"$AWS_SECRET_ACCESS_KEY"'\
-\n&/' run_mongo_jiva_controller_failure.yml
+sed -i '0,/command:/s|        command:| \
+          - name: AWS_ACCESS_KEY_ID \
+            value: '"$AWS_ACCESS_KEY_ID"' \
+          - name: AWS_SECRET_ACCESS_KEY \
+            value: '"$AWS_SECRET_ACCESS_KEY"' \
+\n&|' run_mongo_jiva_controller_failure.yml
 
 #################
 ## RUNNER MAIN ##

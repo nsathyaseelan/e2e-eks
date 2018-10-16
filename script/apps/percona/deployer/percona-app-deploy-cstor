@@ -82,14 +82,14 @@ sed -i -e 's/app: percona-deployment/app: percona-deployment-cstor/g' \
 -e 's/value: openebs-standard/value: openebs-cstor-sparse/g' \
 -e 's/value: app-percona-ns/value: percona-cstor/g' run_cstor_litmus_test.yml
 
-sed -i '0,/command:/ s/command:/\
-          - name: RUN_ID\
-            value: '"$run_metadata"'\
-          - name: AWS_ACCESS_KEY_ID\
-            value: '"$AWS_ACCESS_KEY_ID"'\
-          - name: AWS_SECRET_ACCESS_KEY\
-            value: '"$AWS_SECRET_ACCESS_KEY"'\
-\n&/' run_cstor_litmus_test.yml
+sed -i '0,/command:/s|        command:| \
+          - name: RUN_ID \
+            value: '"$run_metadata"' \
+          - name: AWS_ACCESS_KEY_ID \
+            value: '"$AWS_ACCESS_KEY_ID"' \
+          - name: AWS_SECRET_ACCESS_KEY \
+            value: '"$AWS_SECRET_ACCESS_KEY"' \
+\n&|' run_cstor_litmus_test.yml
 
 #################
 ## RUNNER MAIN ##
