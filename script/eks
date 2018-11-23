@@ -17,3 +17,6 @@ kubectl get nodes
 wget https://raw.githubusercontent.com/openebs/litmus/master/hack/rbac.yaml
 kubectl apply -f rbac.yaml
 kubectl create configmap kubeconfig --from-file=/openebs/e2e-eks/.kube/admin.conf -n litmus
+
+## Overwrite node hostname label to use FQDN
+for i in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}'); do kubectl label node $i kubernetes.io/hostname=$i --overwrite=true; done
