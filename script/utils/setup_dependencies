@@ -9,6 +9,7 @@ derive_cluster_details_infra()
  cp  .kube/config .kube-openebs/config
  cp  .kube/config ~/.kube/config
  cat /openebs/e2e-eks/.kube/clusters > .kube-openebs/clusters
+ cat /openebs/e2e-eks/.kube/region > .kube-openebs/region
 }
  
 setup_cluster_config_test()
@@ -17,6 +18,7 @@ setup_cluster_config_test()
  cp .kube-openebs/config ~/.kube/config
  mkdir ~/logs
  cp .kube-openebs/clusters ~/logs
+ cp .kube-openebs/region ~/logs
 }
 
 if [[ $1 == "infra-setup" ]]; then
