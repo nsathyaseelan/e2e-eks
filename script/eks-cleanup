@@ -2,13 +2,15 @@
 
 set -e
 
+path=$(pwd)
 echo "cleanup"
 mkdir ~/logs
-cp .kube/clusters ~/logs
-cp .kube/region ~/logs
+cp $path/.kube/clusters ~/logs
+cp $path/.kube/region ~/logs
 
 git clone https://github.com/openebs/litmus.git
 cd litmus/k8s/eks/k8s-installer/
 
 echo "cleanup"
 ansible-playbook delete-eks-cluster.yml
+
