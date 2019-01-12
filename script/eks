@@ -1,11 +1,7 @@
 #!/bin/bash
 set -e
 
-#---------------------Runner Cleanup-----------------------------------
-
-kubectl get po -n gitlab-runner
-kubectl get pods -n gitlab-runner -o go-template --template '{{range .items}}{{.metadata.name}} {{.metadata.creationTimestamp}}{{"\n"}}{{end}}' | awk '$2 <= "'$(date -d'now-6 hours' -Ins --utc | sed 's/+0000/Z/')'" { print $1 }' | grep "runner.*project-3" | xargs --no-run-if-empty kubectl delete pod -n gitlab-runner
-
+path=$(pwd)
 git clone https://github.com/openebs/litmus.git
 cd litmus/k8s/eks/k8s-installer/
 
@@ -13,16 +9,17 @@ echo "creating cluster"
 
 ansible-playbook create-eks-cluster.yml -vv
 
-mkdir /openebs/e2e-eks/.kube
-cat ~/.kube/config > /openebs/e2e-eks/.kube/config
-cat ~/.kube/config > /openebs/e2e-eks/.kube/admin.conf
-cat ~/logs/clusters > /openebs/e2e-eks/.kube/clusters
-cat ~/logs/region > /openebs/e2e-eks/.kube/region
+mkdir $path/.kube
+cat ~/.kube/config > $path/.kube/config
+cat ~/.kube/config > $path/.kube/admin.conf
+cat ~/logs/clusters > $path/.kube/clusters
+cat ~/logs/region > $path/.kube/region
 
 kubectl get nodes
 wget https://raw.githubusercontent.com/openebs/litmus/master/hack/rbac.yaml
 kubectl apply -f rbac.yaml
-kubectl create configmap kubeconfig --from-file=/openebs/e2e-eks/.kube/admin.conf -n litmus
+kubectl create configmap kubeconfig --from-file=$path/.kube/admin.conf -n litmus
 
 ## Overwrite node hostname label to use FQDN
 for i in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}'); do kubectl label node $i kubernetes.io/hostname=$i --overwrite=true; done
+

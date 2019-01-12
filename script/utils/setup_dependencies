@@ -4,21 +4,23 @@ set -x
 derive_cluster_details_infra()
 {
  ## Get kubeconfig file into infra-setup gitlab runner pod
- mkdir .kube-openebs
+ path=$(pwd)
+ mkdir $path/.kube-openebs
  mkdir ~/.kube
- cp  .kube/config .kube-openebs/config
- cp  .kube/config ~/.kube/config
- cat /openebs/e2e-eks/.kube/clusters > .kube-openebs/clusters
- cat /openebs/e2e-eks/.kube/region > .kube-openebs/region
+ cp  $path/.kube/config $path/.kube-openebs/config
+ cp  $path/.kube/config ~/.kube/config
+ cat $path/.kube/clusters > $path/.kube-openebs/clusters
+ cat $path/.kube/region > $path/.kube-openebs/region
 }
  
 setup_cluster_config_test()
 {
+ path=$(pwd)	
  mkdir ~/.kube
- cp .kube-openebs/config ~/.kube/config
+ cp $path/.kube-openebs/config ~/.kube/config
  mkdir ~/logs
- cp .kube-openebs/clusters ~/logs
- cp .kube-openebs/region ~/logs
+ cp $path/.kube-openebs/clusters ~/logs
+ cp $path/.kube-openebs/region ~/logs
 }
 
 if [[ $1 == "infra-setup" ]]; then
@@ -27,4 +29,4 @@ elif [[ $1 == "litmus-test" ]]; then
  setup_cluster_config_test;
 else echo "invalid job type"; exit 1
 fi
- 
+
