@@ -123,6 +123,12 @@ percona-cstor-run/load/check 1:2:
   script: 
    - ./script/apps/percona/workload/cstor/percona-app-workload-cstor
 
+## PERCONA-JIVA-SINGLE-REPLICA
+percona-jiva-single-replica-run/load/check:
+  extends: .app_deploy_template
+  script:
+   - ./script/apps/percona/deployer/percona-deploy-jiva-single-replica
+
 # MONGO-CSTOR
 mongo-cstor-run/load/check 0:2:
   extends: .app_deploy_template
@@ -161,7 +167,7 @@ volume-data-integrity-{fio-jiva}:
   script:
    - ./script/apps/fio/tests/jiva/fio-volume-data-integrity-check
 
-snapshot-clone-creation-{percona-jiva}:
+k8s-snapshot-clone-creation-{snapshot-clone-jiva}:
   extends: .func_test_template
   script:
    - ./script/apps/percona/functional/jiva/k8s-snapshot-clone
