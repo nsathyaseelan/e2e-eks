@@ -20,6 +20,7 @@ eks-cluster:
   stage: CLUSTER-SETUP 
   script:
     - chmod 775 ./script/eks 
+    - echo "PIPELINEMODE=$CI_PIPELINE_SOURCE"      
     - ./script/eks
   artifacts:
     paths:
